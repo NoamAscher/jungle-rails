@@ -1,0 +1,13 @@
+<h1> Your profile </h1>
+
+<!-- load current user deets -->
+<% if (current_user) %>
+  <%= @user.firstname %>
+  <%= @user.lastname %>
+<% else %>
+  not signed in
+<% end %>
+
+<%# form_for(:profile, @user) do |f| %>
+  <%# label_tag(:firstname, "First Name") %>
+<%# end %>

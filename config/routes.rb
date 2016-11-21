@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
-  resources :users
+  resources :users, only: [:new, :create]
   root to: 'products#index'
+
+  resource :profile, only: [:show, :edit, :update]
 
   resources :products, only: [:index, :show]
   resources :categories, only: [:show]
@@ -11,13 +13,15 @@ Rails.application.routes.draw do
     delete :remove_item
   end
 
+  resources :sessions, only: [:create, :new, :destroy]
+
   resources :orders, only: [:create, :show]
 
   namespace :admin do
     root to: 'dashboard#show'
     resources :products, :categories, except: [:edit, :update, :show]
 
-  resources :users
+    resources :users
 
   end
 
