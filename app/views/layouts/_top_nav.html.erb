@@ -44,6 +44,14 @@
             <%= fa_icon "shopping-cart" %> My Cart (<%= cart.size %>)
           <% end %>
         </li>
+        <% if (current_user) %>
+          <li>
+
+            <%= link_to "sessions/#{current_user.id}", :method => 'delete' do %>
+              <%= fa_icon "" %> Logout
+            <% end %>
+          </li>
+        <% end %>
       </ul>
     </div>
   </div>

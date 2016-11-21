@@ -16,8 +16,8 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    session[:user_id] = nil
+    redirect_to products_path
   end
 
-  # def to_model
-  # end
 end
