@@ -54,6 +54,7 @@ class OrdersController < ApplicationController
     end
     order.save!
     order
+    UserMailer.order_confirmation(user, order).deliver
   end
 
   # returns total in cents not dollars (stripe uses cents as well)
@@ -66,5 +67,6 @@ class OrdersController < ApplicationController
     end
     total
   end
+
 
 end
