@@ -11,6 +11,8 @@ class OrdersController < ApplicationController
     if order.valid?
       empty_cart!
       redirect_to order, notice: 'Your Order has been placed.'
+      user = User.find(session[:user_id])
+      UserMailer.order_confirmation(user, order).deliver_now
     else
       redirect_to cart_path, error: order.errors.full_messages.first
     end
@@ -54,7 +56,7 @@ class OrdersController < ApplicationController
     end
     order.save!
     order
-    UserMailer.order_confirmation(user, order).deliver
+
   end
 
   # returns total in cents not dollars (stripe uses cents as well)
