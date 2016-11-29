@@ -27,7 +27,13 @@
     </div>
 
     <div class="row">
-
+      <dt>Reviewer</dt>
+      <%= "r_id = @review.user_id" %>
+      <dd><%= "User.find(r_id)" %></dd>
+      <dt>Rating</dt>
+      <dd><%= "@review.rating" %></dd>
+      <dt>Description</dt>
+      <dd><%= "@review.description" %></dd>
     </div>
 
   </article>
