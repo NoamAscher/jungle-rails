@@ -35,7 +35,11 @@
             <%= ratingSum += review.rating %>
             <%= ratingCount += 1 %>
           <% end %>
-          <%= ratingAvg = (ratingSum.to_f / ratingCount.to_f) %>
+          <% if ratingCount == 0 %>
+            <%= ratingAvg = 0 %>
+          <% else %>
+            <%= ratingAvg = (ratingSum.to_f / ratingCount.to_f) %>
+          <% end %>
         </span>
         <dt>Average Rating</dt>
         <dd><%= ((ratingAvg * 10).to_i.to_f)/10 %>
