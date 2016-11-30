@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
 
-
   def index
     render plain: "Everyone can see me!"
   end
