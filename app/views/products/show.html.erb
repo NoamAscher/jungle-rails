@@ -62,14 +62,15 @@
             <% end %>
           </div>
         <% end %>
-
-        <%= form_for [@product, @review] do |review| %>
-          <div> <%= review.label :rating %> </div>
-          <div> <%= review.select :rating, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]]  %> </div>
-          <div> <%= review.label :description %> </div>
-          <div> <%= review.text_area :description %> </div>
-          <div class="submit__button"> <%= review.submit "Submit Review" %> </div>
-        <% end %>
+        <div class ="submit-new">
+          <%= form_for [@product, @review] do |review| %>
+            <div> <%= review.label :rating %> </div>
+            <div> <%= review.select :rating, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]]  %> </div>
+            <div> <%= review.label :description %> </div>
+            <div> <%= review.text_area :description %> </div>
+            <div class="submit__button"> <%= review.submit "Submit Review" %> </div>
+          <% end %>
+        </div>
       </div>
     </div>
 

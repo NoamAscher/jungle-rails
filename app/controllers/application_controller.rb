@@ -1,5 +1,11 @@
 class ApplicationController < ActionController::Base
 
+
+  # Prevent CSRF attacks by raising an exception.
+  # For APIs, you may want to use :null_session instead.
+  protect_from_forgery with: :exception
+
+
   def index
     render plain: "Everyone can see me!"
   end
@@ -7,34 +13,19 @@ class ApplicationController < ActionController::Base
   def edit
     render plain: "I'm only accessible if you know the password"
   end
-  # require 'bcrypt'
 
-  # class PasswordDigester
-  #   def self.encrypt(password)
-  #     BCrypt::Password.create(password)
-  #   end
 
-  #   def self.check?(password, encrypted_password)
-  #     BCrypt::Password.new(encrypted_password) == password
-  #   end
-  # end
+  def current_user
+    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  end
+  helper_method :current_user
 
-  # # For testing
-  # if $0 == __FILE__
-  #   password = ARGV.shift
-
-  #   encrypted = PasswordDigester.encrypt password
-
-  #   success = PasswordDigester.check? password, encrypted
-
-  #   puts encrypted, success
-  # end
+  def authorize
+    redirect_to new_session_path unless current_user
+  end
 
 
 
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
-  protect_from_forgery with: :exception
 
 
 
