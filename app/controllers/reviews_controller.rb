@@ -8,9 +8,9 @@ class ReviewsController < ApplicationController
     redirect_to @product if @review.save
   end
 
-  def delete
+  def destroy
     @product = Product.find(params[:product_id])
-    @review = @product.reviews.new(review_params)
+    @review = Review.find(params[:id])
     @review.destroy
     redirect_to @product
   end

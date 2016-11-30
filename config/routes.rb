@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resource :profile, only: [:show, :edit, :update]
 
   resources :products, only: [:index, :show,] do
-    resources :reviews, only: [:create]
+    resources :reviews, only: [:create, :destroy]
   end
 
   resources :categories, only: [:show]
