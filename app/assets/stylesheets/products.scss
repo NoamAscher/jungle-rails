@@ -85,8 +85,27 @@ main section.products-show {
   }
 }
 
-  .calc-to-hide {
-    visibility: hidden
+  .stuff-to-hide {
+    visibility: hidden;
+  }
+
+  .average-review {
+    float: left;
+    width: 295px;
+  }
+
+  .old-reviews {
+    position: relative;
+    float: left;
+    width: 140px;
+  }
+
+  .submit-new {
+    float: right;
+  }
+
+  .review-list  {
+    padding-bottom: 18px;
   }
 
 

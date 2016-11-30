@@ -28,49 +28,58 @@
 
     <div class="col-sm-8 review-container">
       <div class="row">
-        <span class="calc-to-hide">
-          <%= ratingSum = 0 %>
-          <%= ratingCount = 0 %>
-          <% @product.reviews.each do |review| %>
-            <%= ratingSum += review.rating %>
-            <%= ratingCount += 1 %>
-          <% end %>
-          <% if ratingCount == 0 %>
-            <%= ratingAvg = 0 %>
-          <% else %>
-            <%= ratingAvg = (ratingSum.to_f / ratingCount.to_f) %>
-          <% end %>
-        </span>
-        <dt>Average Rating</dt>
-        <dd><%= ((ratingAvg * 10).to_i.to_f)/10 %>
 
-        <% @product.reviews.reverse.each do |review| %>
-          <div class="review-list">
-            <dt>Reviewer</dt>
-            <dd><%= User.find(review.user).firstname%> <%= User.find(review.user).lastname%></dd>
-            <dt>Rating</dt>
-            <dd><%= review.rating %></dd>
-            <dt>Description</dt>
-            <dd><%= review.description %></dd>
-            <% if current_user %>
-              <% if review.user.id == current_user.id  %>
-                <div id="delrev">
-
-                   <%= link_to fa_icon('trash'), product_review_path(@product, review.id), class: 'btn btn-sm btn-danger', method: :delete, data: { confirm: "Are you sure?" } %>
-                </div>
-              <% end %>
+        <div class="average-review">
+          <span class="stuff-to-hide">
+            <%= ratingSum = 0 %>
+            <%= ratingCount = 0 %>
+            <% @product.reviews.each do |review| %>
+              <%= ratingSum += review.rating %>
+              <%= ratingCount += 1 %>
             <% end %>
-          </div>
-        <% end %>
-        <div class ="submit-new">
+            <% if ratingCount == 0 %>
+              <%= ratingAvg = 0 %>
+            <% else %>
+              <%= ratingAvg = (ratingSum.to_f / ratingCount.to_f) %>
+            <% end %>
+          </span>
+          <dt>Average Rating</dt>
+          <dd><%= ((ratingAvg * 10).to_i.to_f)/10 %>
+        </div>
+
+        <div class="submit-new">
+          <span class="stuff-to-hide">STUFF</span>
           <%= form_for [@product, @review] do |review| %>
             <div> <%= review.label :rating %> </div>
             <div> <%= review.select :rating, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]]  %> </div>
             <div> <%= review.label :description %> </div>
             <div> <%= review.text_area :description %> </div>
-            <div class="submit__button"> <%= review.submit "Submit Review" %> </div>
+            <div class="submit-button"> <%= review.submit "Submit Review" %> </div>
           <% end %>
         </div>
+
+        <div class="old-reviews">
+          <span class="stuff-to-hide">STUFF</span>
+          <% @product.reviews.reverse.each do |review| %>
+            <div class="review-list">
+              <dt>Reviewer</dt>
+              <dd><%= User.find(review.user).firstname%> <%= User.find(review.user).lastname%></dd>
+              <dt>Rating</dt>
+              <dd><%= review.rating %></dd>
+              <dt>Description</dt>
+              <dd><%= review.description %></dd>
+              <% if current_user %>
+                <% if review.user.id == current_user.id  %>
+                  <div id="delrev">
+
+                     <%= link_to fa_icon('trash'), product_review_path(@product, review.id), class: 'btn btn-sm btn-danger', method: :delete, data: { confirm: "Are you sure?" } %>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+
       </div>
     </div>
 
