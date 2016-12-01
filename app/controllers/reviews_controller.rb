@@ -4,8 +4,12 @@ class ReviewsController < ApplicationController
     @product = Product.find(params[:product_id])
     @review =  @product.reviews.new(review_params)
     @review.user = User.find(session[:user_id])
+    # if @review.description != ""
+    #   @review.save
+    # end
     @review.save
-    redirect_to @product if @review.save
+    redirect_to @product #if @review.save <- this isn't actually needed and threw
+                                           # the template missing error, now fixed.
   end
 
   def destroy
