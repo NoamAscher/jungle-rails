@@ -14,9 +14,19 @@ class Admin::CategoriesController < ApplicationController
 
     if @category.save
      # redirect_to [:admin, :category], notice: 'Category created!'
-     redirect_to admin_categories_path
+     redirect_to admin_categories_path, notice: 'Category created!'
     else
       render :new
+    end
+  end
+
+  def destroy
+    @category = Category.find params[:id]
+    if Product.exists?(category_id=@category)
+      redirect_to admin_categories_path, notice: 'Cannot delete, category still has prodcuts.'
+    else
+      @category.destroy
+      redirect_to admin_categories_path, notice: 'Category deleted!'
     end
   end
 

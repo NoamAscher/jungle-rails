@@ -21,8 +21,12 @@ class Admin::ProductsController < ApplicationController
 
   def destroy
     @product = Product.find params[:id]
-    @product.destroy
-    redirect_to [:admin, :products], notice: 'Product deleted!'
+    if LineItem.exists?(product_id=@product)
+      redirect_to [:admin, :products], notice: 'Can\'t delete: product has been ordered, order not yet received.'
+    else
+      @product.destroy
+      redirect_to [:admin, :products], notice: 'Product deleted!'
+    end
   end
 
   private
